@@ -27,6 +27,7 @@ class MathField extends StatefulWidget {
     this.onChanged,
     this.onSubmitted,
     this.opensKeyboard = true,
+    this.rtl = false,
   });
 
   /// The controller for the math field.
@@ -115,6 +116,11 @@ class MathField extends StatefulWidget {
   ///
   /// Defaults to `true`.
   final bool opensKeyboard;
+
+  /// Whether the text in the math field should be displayed right-to-left.
+  /// 
+  /// Defaults to `false`.
+  final bool rtl;
 
   @override
   _MathFieldState createState() => _MathFieldState();
@@ -520,6 +526,7 @@ class _MathFieldState extends State<MathField> with TickerProviderStateMixin {
                   hasFocus: _focusNode.hasFocus,
                   decoration: widget.decoration
                       .applyDefaults(Theme.of(context).inputDecorationTheme),
+                  rtl: widget.rtl,
                 );
               },
             ),
@@ -540,6 +547,7 @@ class _FieldPreview extends StatelessWidget {
     required this.hasFocus,
     required this.decoration,
     required this.scrollController,
+    this.rtl = false,
   }) : super(key: key);
 
   /// The controller for the math field.
@@ -557,6 +565,9 @@ class _FieldPreview extends StatelessWidget {
 
   /// The decoration to show around the text field.
   final InputDecoration decoration;
+
+  /// Whether the text in the math field should be displayed right-to-left.
+  final bool rtl;
 
   // Adapted from InputDecorator._getFillColor.
   Color _getDisabledCursorColor(ThemeData themeData) {
@@ -636,6 +647,7 @@ class _FieldPreview extends StatelessWidget {
         child: SingleChildScrollView(
           controller: scrollController,
           scrollDirection: Axis.horizontal,
+          reverse: rtl,
           child: Stack(
             children: [
               Transform.translate(
