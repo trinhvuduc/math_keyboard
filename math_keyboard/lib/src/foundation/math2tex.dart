@@ -46,8 +46,10 @@ List<TeX> _convertToTeX(Expression mathExpression, TeXNode parent) {
         ..._convertToTeX(mathExpression.second, parent),
       ];
     } else if (mathExpression is Minus) {
+      final firstIsZero = mathExpression.first is Number &&
+          (mathExpression.first as Number).value == 0;
       result = [
-        ..._convertToTeX(mathExpression.first, parent),
+        ...(!firstIsZero ? _convertToTeX(mathExpression.first, parent) : []),
         const TeXLeaf('-'),
         ..._convertToTeX(mathExpression.second, parent),
       ];
@@ -72,12 +74,18 @@ List<TeX> _convertToTeX(Expression mathExpression, TeXNode parent) {
       // Note that modulo is unsupported.
       throw UnimplementedError();
     }
-    // Wrap with parentheses to keep precedence.
-    return [
-      TeXLeaf('('),
-      ...result,
-      TeXLeaf(')'),
-    ];
+
+    // Wrap the expression in parentheses if it is not already.
+    final expressionString = mathExpression.toString();
+    if (!expressionString.startsWith('(') || !expressionString.endsWith(')')) {
+      return [
+        TeXLeaf('('),
+        ...result,
+        TeXLeaf(')'),
+      ];
+    }
+
+    return result;
   }
   if (mathExpression is Literal) {
     if (mathExpression is Number) {
