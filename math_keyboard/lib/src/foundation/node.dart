@@ -151,6 +151,8 @@ class TeXFunction extends TeX {
         return '{';
       case TeXArg.brackets:
         return '[';
+      case TeXArg.absoluteValue:
+        return r'\left|';
       default:
         return '(';
     }
@@ -163,6 +165,8 @@ class TeXFunction extends TeX {
         return '}';
       case TeXArg.brackets:
         return ']';
+      case TeXArg.absoluteValue:
+        return r'\right|';
       default:
         return ')';
     }
@@ -260,4 +264,9 @@ enum TeXArg {
   /// for functions like sin, cos, tan, etc. as well, so the user doesn't have
   /// to close the parentheses manually.
   parentheses,
+
+  /// ||
+  ///
+  /// Double vertical bars are used for the absolute value function.
+  absoluteValue,
 }
