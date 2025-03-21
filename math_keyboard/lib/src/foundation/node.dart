@@ -151,8 +151,14 @@ class TeXFunction extends TeX {
         return '{';
       case TeXArg.brackets:
         return '[';
+      case TeXArg.underscore_braces:
+        return '_{';
+      case TeXArg.caret_braces:
+        return '^{';
       case TeXArg.absoluteValue:
         return r'\left|';
+      case TeXArg.parentheses_lr:
+        return r'\left(';
       default:
         return '(';
     }
@@ -162,11 +168,15 @@ class TeXFunction extends TeX {
   String closingChar(TeXArg type) {
     switch (type) {
       case TeXArg.braces:
+      case TeXArg.underscore_braces:
+      case TeXArg.caret_braces:
         return '}';
       case TeXArg.brackets:
         return ']';
       case TeXArg.absoluteValue:
         return r'\right|';
+      case TeXArg.parentheses_lr:
+        return r'\right)';
       default:
         return ')';
     }
@@ -265,8 +275,26 @@ enum TeXArg {
   /// to close the parentheses manually.
   parentheses,
 
+  /// \left( \right)
+  ///
+  /// These parentheses automatically expand to match the size of their content,
+  /// making them more visually appealing in most cases.
+  parentheses_lr,
+
   /// ||
   ///
   /// Double vertical bars are used for the absolute value function.
   absoluteValue,
+
+  /// _{ }
+   ///
+   /// This allows you to define subscript arguments on functions that support
+   /// it (like summation)
+   underscore_braces,
+ 
+   /// ^{ }
+   ///
+   /// This allows you to define superscript arguments on functions that support
+   /// it (like summation)
+   caret_braces,
 }
