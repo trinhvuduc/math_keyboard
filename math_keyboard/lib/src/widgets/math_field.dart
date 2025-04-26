@@ -659,10 +659,11 @@ class _FieldPreview extends StatelessWidget {
                     : Offset(-1, 0),
                 child: Math.tex(
                   tex,
-                  options: MathOptions(
-                    fontSize: MathOptions.defaultFontSize,
-                    color: Theme.of(context).colorScheme.onSurface,
-                  ),
+                  textStyle: TextStyle(fontSize: 48, fontWeight: FontWeight.w600),
+                  // options: MathOptions(
+                  //   fontSize: MathOptions.defaultFontSize,
+                  //   color: Theme.of(context).colorScheme.onSurface,
+                  // ),
                 ),
               ),
               // todo: let InputDecorator take care of the hint text (as soon as

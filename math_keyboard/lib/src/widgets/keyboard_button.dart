@@ -37,8 +37,7 @@ class KeyboardButton extends StatefulWidget {
   _KeyboardButtonState createState() => _KeyboardButtonState();
 }
 
-class _KeyboardButtonState extends State<KeyboardButton>
-    with SingleTickerProviderStateMixin {
+class _KeyboardButtonState extends State<KeyboardButton> with SingleTickerProviderStateMixin {
   late final _animationController = AnimationController(
     duration: const Duration(milliseconds: 50),
     reverseDuration: const Duration(milliseconds: 200),
@@ -80,8 +79,7 @@ class _KeyboardButtonState extends State<KeyboardButton>
       child: RawGestureDetector(
         behavior: HitTestBehavior.opaque,
         gestures: <Type, GestureRecognizerFactory>{
-          _AlwaysWinningGestureRecognizer: GestureRecognizerFactoryWithHandlers<
-              _AlwaysWinningGestureRecognizer>(
+          _AlwaysWinningGestureRecognizer: GestureRecognizerFactoryWithHandlers<_AlwaysWinningGestureRecognizer>(
             () => _AlwaysWinningGestureRecognizer(),
             (_AlwaysWinningGestureRecognizer instance) {
               instance
@@ -105,10 +103,8 @@ class _KeyboardButtonState extends State<KeyboardButton>
                 return DecoratedBox(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
-                    color: Colors.white.withValues(
-                      alpha: Curves.easeInOut
-                              .transform(_animationController.value) /
-                          3,
+                    color: Color(0xFF0080FF).withValues(
+                      alpha: Curves.easeInOut.transform(_animationController.value) / 3,
                     ),
                   ),
                   child: Center(
